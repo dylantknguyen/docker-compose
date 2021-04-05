@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  syncthing:
+    image: ghcr.io/linuxserver/syncthing
+    container_name: syncthing
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./config:/config
+      - /mnt/home/dylan/Music:/data1
+      # - /path/to/data2:/data2
+    ports:
+      - 7400:8384
+      - 22000:22000
+    restart: unless-stopped

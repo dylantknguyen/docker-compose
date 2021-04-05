@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  jellyfin:
+    image: ghcr.io/linuxserver/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./config:/config
+      - /mnt/files/tv:/data/tvshows
+      - /mnt/files/movies:/data/movies
+    ports:
+      - 8000:8096
+    restart: unless-stopped

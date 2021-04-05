@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  calibre:
+    image: ghcr.io/linuxserver/calibre
+    container_name: calibre
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./config:/config
+      - /mnt/files/books:/books
+    ports:
+      - 7200:8080
+      - 7300:8081
+    restart: unless-stopped
