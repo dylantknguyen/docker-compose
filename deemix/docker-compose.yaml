@@ -1,14 +1,15 @@
-version: '3.3'
+version: "3.3"
 services:
-    deemix:
-        image: registry.gitlab.com/bockiii/deemix-docker
-        container_name: deemix
-        environment:
-            - PUID=1000
-            - PGID=1000
-            - ARL=${ARL}
-        volumes:
-            - /mnt/files/downloads/music:/downloads
-            - ./config:/config
-        ports:
-            - 8600:6595
+  deemix:
+    image: registry.gitlab.com/bockiii/deemix-docker
+    container_name: deemix
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - ARL=${ARL}
+    volumes:
+      - /mnt/files/downloads/music:/downloads
+      - ./config:/config
+    ports:
+      - 8600:6595
+    restart: unless-stopped

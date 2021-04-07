@@ -1,0 +1,27 @@
+version: "3"
+services:
+  yourls:
+    image: yourls:latest
+    links:
+      - db
+    environment:
+      - YOURLS_DB_HOST=db:3306
+      - YOURLS_SITE=${DOMAIN}
+      - YOURLS_DB_PASS=${DB_ROOT_PASS}
+      - YOURLS_DB_NAME=${DB_NAME}
+      - YOURLS_DB_USER=${DB_USER}
+      - YOURLS_DB_PASS=${DB_PASS}
+      - YOURLS_USER=${YOURLS_USER}
+      - YOURLS_PASS=${YOURLS_PASS}
+    ports:
+      - 7600:80
+    restart: unless-stopped
+
+  db:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+    restart: unless-stopped

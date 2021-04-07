@@ -3,6 +3,8 @@ services:
   heimdall:
     image: ghcr.io/linuxserver/heimdall
     container_name: heimdall
+    networks:
+      - proxy
     environment:
       - PUID=1000
       - PGID=1000
@@ -16,17 +18,25 @@ services:
     container_name: swag
     cap_add:
       - NET_ADMIN
+    networks:
+      - proxy
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Amerca/New_York
-      - URL=dylantknguyen.com
+      - URL=<DOMAIN>
       - SUBDOMAINS=wildcard
       - VALIDATION=dns
       - DNSPLUGIN=cloudflare
     volumes:
       - ./swag:/config
+      - /home/dylan/nextcloud/nextcloud/log:/config/log/nextcloud:ro
     ports:
       - 443:443
       - 80:80
     restart: unless-stopped
+
+networks:
+  proxy:
+    name: proxy
+
