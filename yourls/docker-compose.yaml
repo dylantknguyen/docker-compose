@@ -1,6 +1,7 @@
 version: "3"
 services:
   yourls:
+    container_name: yourls
     image: yourls:latest
     links:
       - db
@@ -15,9 +16,12 @@ services:
       - YOURLS_PASS=${YOURLS_PASS}
     ports:
       - 7600:80
+    volumes:
+      - ./yourls:/var/www/html/user
     restart: unless-stopped
 
   db:
+    container_name: yourls-db
     image: mariadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}

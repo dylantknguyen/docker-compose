@@ -3,6 +3,7 @@ services:
   jellyfin:
     image: ghcr.io/linuxserver/jellyfin
     container_name: jellyfin
+    privileged: true
     environment:
       - PUID=1000
       - PGID=1000
@@ -11,6 +12,9 @@ services:
       - ./config:/config
       - /mnt/files/tv:/data/tvshows
       - /mnt/files/movies:/data/movies
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
     ports:
       - 8000:8096
     restart: unless-stopped

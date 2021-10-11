@@ -18,7 +18,6 @@ services:
       - .env
     volumes:
       - app:/var/www/html
-      - ./config.d:/opt/tt-rss/config.d:ro
     depends_on:
       - db
 
@@ -41,7 +40,6 @@ services:
       - .env
     volumes:
       - app:/var/www/html
-      - ./config.d:/opt/tt-rss/config.d:ro
     depends_on:
       - app
     command: /opt/tt-rss/updater.sh

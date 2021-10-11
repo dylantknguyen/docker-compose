@@ -25,7 +25,7 @@ services:
       net-pihole:
         ipv4_address: 172.24.0.3
     volumes:
-      - ./unbound:/opt/unbound/etc/unbound
+      - ./unbound:/etc/unbound
     ports:
       - 5053:5053/udp
     restart: unless-stopped
